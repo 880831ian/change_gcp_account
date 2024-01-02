@@ -27,7 +27,9 @@ select email in "${email_array[@]}"; do
         echo "\n選擇${YELLOW} $configurations ${NC}/${YELLOW} $email ${NC}作為使用帳號"
         break
         ;;
-    *) echo "${RED}無效參數 ($REPLY)，請重新輸入${NC}" ;;
+    *)
+        echo "${RED}無效參數 ($REPLY)，請重新輸入${NC}"
+        ;;
     esac
 done
 
