@@ -18,27 +18,28 @@ select email in "${email_array[@]}"; do
     "ian_zhuang@gmail.com")
         configurations="default"
         cluster="gke_gcp-XXXXXXX"
-        echo "\n選擇${YELLOW} $configurations ${NC}/${YELLOW} $email ${NC}作為使用帳號"
+        echo -e "\n選擇${YELLOW} $configurations ${NC}/${YELLOW} $email ${NC}作為使用帳號"
         break
         ;;
     "880831ian@gmail.com")
         configurations="presonal"
         cluster="gke_gcp-XXXXXXX"
-        echo "\n選擇${YELLOW} $configurations ${NC}/${YELLOW} $email ${NC}作為使用帳號"
+        echo -e "\n選擇${YELLOW} $configurations ${NC}/${YELLOW} $email ${NC}作為使用帳號"
         break
         ;;
     *)
-        echo "${RED}無效參數 ($REPLY)，請重新輸入${NC}"
+        echo -e "${RED}無效參數 ($REPLY)，請重新輸入${NC}"
         ;;
     esac
 done
 
+gcloud auth application-default login
 rm -rf ~/.kube/gke_gcloud_auth_plugin_cache
 rm -rf ~/.kube/cache/ && rm -rf ~/.kube/http-cache/
 gcloud config configurations activate $configurations 2>/dev/null
 gcloud config set account $email
 kubectl config use-context $cluster
 
-echo "\n${BLUE}顯示目前帳號資訊${NC}\n"
+echo -e "\n${BLUE}顯示目前帳號資訊${NC}\n"
 gcloud config list
 gcloud config configurations list
